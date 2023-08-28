@@ -8,7 +8,8 @@ using Microsoft.Extensions.Configuration;
 
 SqlCrud sql = new SqlCrud(GetConnectionString());
 
-ReadAllContacts(sql);
+//ReadAllContacts(sql);
+ReadContact(sql, 1);
 
 
 static void ReadAllContacts(SqlCrud sql)
@@ -19,6 +20,15 @@ static void ReadAllContacts(SqlCrud sql)
     {
         Console.WriteLine($"{row.Id}: {row.FirstName} {row.LastName}");
     }
+}
+
+static void ReadContact(SqlCrud sql, int contactId)
+{
+    var contact = sql.GetContactById(contactId);
+
+    
+        Console.WriteLine($"{contact.PersonInfo.Id}: {contact.PersonInfo.FirstName} {contact.PersonInfo.LastName}");
+    
 }
 
 static string GetConnectionString(string connectionStringName = "Defualt")
