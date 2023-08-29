@@ -8,6 +8,7 @@ namespace DataAccessLibrary.Models
 {
     public class EmailAddressModel
     {
+        public int Id { get; set; }
         public string Email { get; set; }
     }
 }

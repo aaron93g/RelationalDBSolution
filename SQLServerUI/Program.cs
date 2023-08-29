@@ -1,5 +1,6 @@
 ﻿
 using DataAccessLibrary;
+using DataAccessLibrary.Models;
 using Microsoft.Extensions.Configuration;
 
 // Tests we are able to reach the Data base
@@ -9,8 +10,31 @@ using Microsoft.Extensions.Configuration;
 SqlCrud sql = new SqlCrud(GetConnectionString());
 
 //ReadAllContacts(sql);
-ReadContact(sql, 1);
+//ReadContact(sql, 1);
+CreateNewContact(sql);
 
+
+
+
+
+static void CreateNewContact(SqlCrud sql)
+{
+    ContactModel model = new ContactModel
+    {
+        PersonInfo = new BasicPersonModel { FirstName = "Andrew", LastName = "Garcia" }
+        //EmailAddresses = new List<EmailAddressModel> { new EmailAddressModel { Email = "Andrew@outlook.com"},
+        //                                               new EmailAddressModel{Email = "AndrewIsAwesome@Gmail.com"}},
+        //PhoneNumbers = new List<PhoneNumberModel> { new PhoneNumberModel { PhoneNumber = "559-5559"},
+        //                                            new PhoneNumberModel {PhoneNumber = "915-5559"}}
+    };
+
+    model.EmailAddresses.Add(new EmailAddressModel { Email = "aaron@outlook.com" });
+    model.EmailAddresses.Add(new EmailAddressModel { Email = "AndrewIsAwesome@outlook.com" });
+    model.PhoneNumbers.Add(new PhoneNumberModel { PhoneNumber = "559-5559" });
+    model.PhoneNumbers.Add(new PhoneNumberModel { PhoneNumber = "555-5915" });
+
+    sql.CreateContact(model);
+}
 
 static void ReadAllContacts(SqlCrud sql)
 {
