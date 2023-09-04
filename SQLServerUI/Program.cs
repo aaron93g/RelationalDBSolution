@@ -11,7 +11,10 @@ SqlCrud sql = new SqlCrud(GetConnectionString());
 
 //ReadAllContacts(sql);
 //ReadContact(sql, 1);
-CreateNewContact(sql);
+//CreateNewContact(sql);
+//UpdateContact(sql);
+//RemovePhoneNumberConnection(sql, 4002, 1);
+//RemovePhoneNumberConnection(sql, 1, 1);
 
 
 
@@ -68,4 +71,21 @@ static string GetConnectionString(string connectionStringName = "Defualt")
     output = config.GetConnectionString(connectionStringName);
 
     return output;
+}
+
+static void UpdateContact(SqlCrud sql)
+{
+    BasicPersonModel person = new BasicPersonModel
+    {
+        Id = 1,
+        FirstName = "Andrew",
+        LastName = "Garcia"
+    };
+
+    sql.UpdatePersonName(person);
+}
+
+static void RemovePhoneNumberConnection(SqlCrud sql, int personId, int phoneNumberId)
+{
+    sql.RemovePhoneNumberFromContact(personId, phoneNumberId);
 }

@@ -106,5 +106,26 @@ namespace DataAccessLibrary
                 db.SaveData(sql, new { PersonId = contactId, EmailAddressId = email.Id }, connectionString);
             }
         }
+
+        public void UpdatePersonName(BasicPersonModel person)
+        {
+            string sql = "update dbo.Person set FirstName = @FirstName, LastName = @LastName where Id = @Id;";
+            db.SaveData(sql, person, connectionString);
+        }
+
+        public void RemovePhoneNumberFromContact(int personId, int PhoneNumberId)
+        {
+            string sql = "select Id, PersonId, PhoneNumberId from dbo.ContactsPhoneNumber where PhoneNumberId = @PhoneNumberId;";
+            var links = db.LoadData<ContactsPhoneNumber, dynamic>(sql, new { PhoneNumberId }, connectionString);
+
+            sql = "delete from dbo.ContactsPhoneNumber where PhoneNumberId = @PhoneNumberId and PersonId = @personId;";
+            db.SaveData(sql, new { personId, PhoneNumberId }, connectionString);
+
+            if (links.Count == 1)
+            {
+                sql = "delete from dbo.PhoneNumbers where Id = @PhoneNumberId;";
+                db.SaveData(sql, new {PhoneNumberId}, connectionString);
+            }
+        }
     }
 }
