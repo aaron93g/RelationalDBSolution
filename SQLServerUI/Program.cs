@@ -21,17 +21,17 @@ static void CreateNewContact(SqlCrud sql)
 {
     ContactModel model = new ContactModel
     {
-        PersonInfo = new BasicPersonModel { FirstName = "Alexander", LastName = "Garcia" }
+        PersonInfo = new BasicPersonModel { FirstName = "Adrian", LastName = "Garcia" }
         //EmailAddresses = new List<EmailAddressModel> { new EmailAddressModel { Email = "Andrew@outlook.com"},
         //                                               new EmailAddressModel{Email = "AndrewIsAwesome@Gmail.com"}},
         //PhoneNumbers = new List<PhoneNumberModel> { new PhoneNumberModel { PhoneNumber = "559-5559"},
         //                                            new PhoneNumberModel {PhoneNumber = "915-5559"}}
     };
 
-    model.EmailAddresses.Add(new EmailAddressModel {Id=1, Email = "aaron@yahoo.com" });
+    model.EmailAddresses.Add(new EmailAddressModel { Email = "aaron@outlook.com" });
     model.EmailAddresses.Add(new EmailAddressModel { Email = "AdrianIsAwesome@outlook.com" });
     model.PhoneNumbers.Add(new PhoneNumberModel { PhoneNumber = "559-1111" });
-    model.PhoneNumbers.Add(new PhoneNumberModel {Id=1, PhoneNumber = "555-1235" });
+    model.PhoneNumbers.Add(new PhoneNumberModel { PhoneNumber = "555-2222" });
 
     sql.CreateContact(model);
 }
