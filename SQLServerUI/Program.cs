@@ -17,7 +17,20 @@ SqlCrud sql = new SqlCrud(GetConnectionString());
 //RemovePhoneNumberConnection(sql, 1, 1);
 
 
+static string GetConnectionString(string connectionStringName = "Defualt")
+{
+    string output = "";
 
+    var builder = new ConfigurationBuilder()
+        .SetBasePath(Directory.GetCurrentDirectory())
+        .AddJsonFile("AppSettings.json");
+
+    var config = builder.Build();
+
+    output = config.GetConnectionString(connectionStringName);
+
+    return output;
+}
 
 
 static void CreateNewContact(SqlCrud sql)
@@ -58,20 +71,6 @@ static void ReadContact(SqlCrud sql, int contactId)
     
 }
 
-static string GetConnectionString(string connectionStringName = "Defualt")
-{
-    string output = "";
-
-    var builder = new ConfigurationBuilder()
-        .SetBasePath(Directory.GetCurrentDirectory())
-        .AddJsonFile("AppSettings.json");
-
-    var config = builder.Build();
-
-    output = config.GetConnectionString(connectionStringName);
-
-    return output;
-}
 
 static void UpdateContact(SqlCrud sql)
 {
